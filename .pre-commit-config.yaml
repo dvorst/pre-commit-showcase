@@ -1,0 +1,35 @@
+repos:
+
+# ruff
+-   repo: https://github.com/astral-sh/ruff-pre-commit  
+    rev: v0.9.4
+    hooks:
+    # Run the linter.
+    -   id: ruff
+    # Run the formatter.
+    -   id: ruff-format
+
+# mypy
+# NOTE: mypy of the locally installed venv is used rather than installing mypy
+# in isolated environment. By using the local .venv, types of other packages
+# installed in the local venv can be used.
+-   repo: local
+    hooks:
+    -   id: mypy
+        name: mypy
+        entry: .venv/Scripts/mypy.exe
+        language: system
+        types: [python]
+        args: [--strict]
+
+# check lock file
+-   repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.5.26
+    hooks:
+    -   id: uv-lock
+
+# format toml file
+-   repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+     -  id: taplo-format
